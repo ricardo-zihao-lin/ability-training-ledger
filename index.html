@@ -82,7 +82,7 @@
       outline-offset: -2px;
     }
 
-    .segment-button[aria-pressed="true"] .box::before, .habit-item[aria-pressed="true"] .box::before, .checkmark.done::before {
+    .segment-button[aria-pressed="true"] .box::before, .habit-item[aria-pressed="true"] .box::before, .schedule-block[aria-pressed="true"] .box::before, .checkmark.done::before {
       content: "✓";
     }
 
@@ -1294,6 +1294,189 @@
       text-transform: uppercase;
     }
 
+    .schedule-rule-strip {
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--line);
+      margin: 0 0 24px;
+    }
+
+    .schedule-rule {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr);
+      gap: 12px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--line-soft);
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .schedule-rule:last-child {
+      border-bottom: 0;
+    }
+
+    .schedule-rule-number {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.06em;
+    }
+
+    .schedule-rule.critical {
+      color: var(--ink);
+      border-left: 3px solid var(--accent);
+      padding-left: 12px;
+      background: var(--surface);
+    }
+
+    .schedule-signal {
+      display: grid;
+      grid-template-columns: 170px minmax(0, 1fr);
+      gap: 16px;
+      align-items: center;
+      margin: 0 0 18px;
+      padding: 12px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .schedule-signal strong {
+      color: var(--accent);
+      font-family: var(--serif);
+      font-size: 1.18rem;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    .track-setting {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: start;
+      margin: 0 0 24px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .track-setting p {
+      margin: 5px 0 0;
+    }
+
+    .track-options {
+      display: inline-flex;
+      gap: 8px;
+      padding: 3px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    .track-button {
+      min-height: 34px;
+      padding: 6px 11px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-variant-caps: small-caps;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+    }
+
+    .track-button:hover, .track-button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .track-button[aria-pressed="true"] {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--paper);
+    }
+
+    .schedule-sheet {
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .schedule-block {
+      display: grid;
+      grid-template-columns: 28px 114px minmax(0, 1fr);
+      gap: 12px;
+      width: 100%;
+      min-height: 72px;
+      padding: 12px 0;
+      border: 0;
+      border-bottom: 1px solid var(--line-soft);
+      background: transparent;
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .schedule-block:last-child {
+      border-bottom: 0;
+    }
+
+    .schedule-block:hover, .schedule-block:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      background: var(--surface);
+    }
+
+    .schedule-block[aria-pressed="true"] .box {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--paper);
+    }
+
+    .schedule-block.nonnegotiable {
+      border-left: 3px solid var(--accent);
+      padding-left: 12px;
+      background: var(--surface);
+    }
+
+    .schedule-time {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      line-height: 1.55;
+      white-space: nowrap;
+    }
+
+    .schedule-content {
+      display: block;
+      line-height: 1.55;
+    }
+
+    .schedule-text {
+      display: block;
+      font-weight: 600;
+    }
+
+    .schedule-detail, .schedule-note {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .schedule-tag {
+      display: inline-block;
+      margin: 0 0 5px;
+      padding: 1px 6px 2px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-variant-caps: small-caps;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
     .settings-panel {
       padding: 17px 18px;
       border: 1px solid var(--line);
@@ -1425,8 +1608,30 @@
     }
 
     @media (max-width: 680px) {
-      .week-brief, .metric-strip, .stats-grid, .field-grid, .analysis-grid, .settings-grid, .archive-controls {
+      .week-brief, .metric-strip, .stats-grid, .field-grid, .analysis-grid, .settings-grid, .archive-controls, .schedule-signal, .track-setting {
         grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .track-options {
+        width: 100%;
+      }
+
+      .track-button {
+        flex: 1;
+      }
+
+      .schedule-block {
+        grid-template-columns: 28px minmax(0, 1fr);
+      }
+
+      .schedule-time {
+        grid-column: 2;
+      }
+
+      .schedule-content {
+        grid-column: 2;
       }
     }
 
@@ -1621,6 +1826,7 @@
         <a class="nav-link" href="#progress" data-route="progress">§5 进度</a>
         <a class="nav-link" href="#archive" data-route="archive">§6 回顾</a>
         <a class="nav-link" href="#habits" data-route="habits">§7 习惯</a>
+        <a class="nav-link" href="#schedule" data-route="schedule">§8 日程</a>
       </nav>
     </header>
     <div class="layout">
@@ -1641,7 +1847,7 @@
       const WEEK_HABITS_PREFIX = `${APP}:weekhabits:`;
       const ONCE_HABITS_KEY = `${APP}:oncehabits`;
       const DAY_MS = 86400000;
-      const ROUTES = ["today", "week", "plan", "templates", "progress", "archive", "habits"];
+      const ROUTES = ["today", "week", "plan", "templates", "progress", "archive", "habits", "schedule"];
 
       const SEGMENTS = [
         { id: "input", zh: "输入", en: "Input", desc: "读、听或观察，留下一个真实问题。" },
@@ -1710,6 +1916,39 @@
         }
       ];
 
+      const SCHEDULE_RULES = [
+        "手机不在床头——昨晚就放客厅充电。睁眼第一件事是起床，不是碰手机。",
+        "签证 + 投递 = 唯一非协商项，排在所有事前面，直到 Graduate Route 交上去为止。其余全是加分。",
+        "一天崩一块，从下一块接上，别因为崩了一块就把整天作废。",
+        "起床时间最不重要：7:30 起不来就 8:00，后面整体顺延，别因为没早起就废掉一天。"
+      ];
+
+      const RUNSHEET_BLOCKS = [
+        { id: "wake", time: "7:30", text: "起床，手机在客厅" },
+        { id: "cardio", time: "7:30–8:30", text: "跑步/有氧 + 冲澡（今天第一个杠杆；走跑交替起步，慢慢加）" },
+        { id: "breakfast", time: "8:30–9:00", text: "早餐 + 换上出门的衣服" },
+        { id: "jobcore", time: "9:00–10:30", text: "【非协商·求职核心块】手机扔另一房间：签证往前推 + 投 2–3 个岗 → 做完今天就算赢", nonnegotiable: true },
+        { id: "break1", time: "10:30–10:45", text: "休息，光明正大刷手机" },
+        { id: "ielts", time: "10:45–12:15", text: "雅思块", dynamic: "ielts", note: "第一周先做一套完整限时模考定位；写作最难自评，写完找人按评分标准逐条过。" },
+        { id: "lunch", time: "12:15–13:15", text: "午饭 + 真休息" },
+        { id: "cs", time: "13:15–14:45", text: "计算机块", dynamic: "computer" },
+        { id: "break2", time: "14:45–15:00", text: "休息" },
+        { id: "flex", time: "15:00–17:00", text: "弹性块", dynamic: "flex" },
+        { id: "landing", time: "17:00 之后", text: "软着陆，吃饭，真下班" },
+        { id: "night", time: "睡前 2 分钟", text: "定明天第一个动作，手机放回客厅" }
+      ];
+
+      const COMPUTER_TRACKS = {
+        portfolio: {
+          label: "作品集向",
+          text: "SQL / 云 / 数据管道，或把两个 ML 项目做深 → 直接喂求职"
+        },
+        interview: {
+          label: "面试向",
+          text: "LeetCode 算法/数据结构 → 技术面准备"
+        }
+      };
+
       const WEEK_PLANS = [
         { week: 1, phase: "阶段一（W1–4）打地基：建立循环、核心结构、起步表达", title: "建立循环 + 结论先行(BLUF)", goal: "连续5天跑完每日引擎,每篇输出结论在第一句", daily: "拆一件小事→写150词英文(结论先行)", review: "每天一行,周末数打卡天数" },
         { week: 2, phase: "阶段一（W1–4）打地基：建立循环、核心结构、起步表达", title: "来历与因果", goal: "学会问\"这东西哪来的、当年服务什么\"", daily: "分析模板重点填\"来历/当年服务的宏观力量\"", review: "本周哪次追到了真原因" },
@@ -1766,7 +2005,7 @@
 
       const memoryStore = {};
       const state = {
-        route: "today",
+        route: "schedule",
         meta: null,
         selectedWeek: null,
         storageMode: "localStorage",
@@ -1941,6 +2180,14 @@
         return habitItemsFor(groupId).map((item) => item.id);
       }
 
+      function runsheetIds() {
+        return RUNSHEET_BLOCKS.map((block) => block.id);
+      }
+
+      function normalizeComputerTrack(value) {
+        return value === "interview" ? "interview" : "portfolio";
+      }
+
       function normalizeHabitMap(value, ids) {
         const source = value && typeof value === "object" ? value : {};
         return ids.reduce((acc, id) => {
@@ -1971,6 +2218,7 @@
             return acc;
           }, defaultAnalysis()),
           habits: normalizeHabitMap(source.habits, habitIdsFor("daily")),
+          runsheet: normalizeHabitMap(source.runsheet, runsheetIds()),
           note: typeof source.note === "string" ? source.note : "",
           reflection: typeof source.reflection === "string" ? source.reflection : "",
           updatedAt: typeof source.updatedAt === "string" ? source.updatedAt : ""
@@ -1990,13 +2238,17 @@
       function loadMeta() {
         const parsed = parseJSON(readRaw(META_KEY));
         const start = parsed && keyToDate(parsed.start) ? parsed.start : dateToKey(today());
-        const meta = { start };
-        if (!parsed || parsed.start !== start) saveMeta(meta);
+        const computerTrack = normalizeComputerTrack(parsed && parsed.computerTrack);
+        const meta = { start, computerTrack };
+        if (!parsed || parsed.start !== start || parsed.computerTrack !== computerTrack) saveMeta(meta);
         return meta;
       }
 
       function saveMeta(meta) {
-        writeRaw(META_KEY, JSON.stringify({ start: meta.start }));
+        writeRaw(META_KEY, JSON.stringify({
+          start: meta.start,
+          computerTrack: normalizeComputerTrack(meta.computerTrack)
+        }));
       }
 
       function weekHabitsStorageKey(weekNumber = currentWeekNumber()) {
@@ -2163,7 +2415,7 @@
 
       function routeFromHash() {
         const route = window.location.hash.replace("#", "");
-        return ROUTES.includes(route) ? route : "today";
+        return ROUTES.includes(route) ? route : "schedule";
       }
 
       function setFlash(message) {
@@ -2194,7 +2446,8 @@
           templates: renderTemplates,
           progress: renderProgress,
           archive: renderArchive,
-          habits: renderHabits
+          habits: renderHabits,
+          schedule: renderSchedule
         }[state.route]();
 
         document.getElementById("margin-notes").innerHTML = renderMarginNotes();
@@ -2719,6 +2972,89 @@
         `;
       }
 
+      function ieltsForDate(date) {
+        const day = date.getDay();
+        if (day === 1 || day === 4) return "写作：Task 2 结构 + Task 1 图表（你的主要丢分项）";
+        if (day === 2) return "口语 + 听力";
+        if (day === 3) return "阅读 + 词汇/搭配（Anki）";
+        if (day === 5) return "一套限时单项";
+        return "完整模考 + 复盘（周末做一次即可）";
+      }
+
+      function flexForDate(date) {
+        const day = date.getDay();
+        if (day === 2 || day === 4 || day === 6) return "出门扫街：餐饮/零售/中介，递简历，问能不能跟经理聊两句";
+        return "更多投递，或继续作品集/计算机";
+      }
+
+      function scheduleDetail(block, date, track) {
+        if (block.dynamic === "ielts") return ieltsForDate(date);
+        if (block.dynamic === "flex") return flexForDate(date);
+        if (block.dynamic === "computer") return COMPUTER_TRACKS[normalizeComputerTrack(track)].text;
+        return "";
+      }
+
+      function renderScheduleBlock(block, day, date, track) {
+        const done = Boolean(day.runsheet[block.id]);
+        const detail = scheduleDetail(block, date, track);
+        return `
+          <button class="schedule-block ${block.nonnegotiable ? "nonnegotiable" : ""}" type="button" data-runsheet-block="${escapeHtml(block.id)}" aria-pressed="${done ? "true" : "false"}">
+            <span class="box" aria-hidden="true"></span>
+            <span class="schedule-time">${escapeHtml(block.time)}</span>
+            <span class="schedule-content">
+              ${block.nonnegotiable ? `<span class="schedule-tag">非协商</span>` : ""}
+              <span class="schedule-text">${escapeHtml(block.text)}</span>
+              ${detail ? `<span class="schedule-detail">${escapeHtml(detail)}</span>` : ""}
+              ${block.note ? `<span class="schedule-note">${escapeHtml(block.note)}</span>` : ""}
+            </span>
+          </button>
+        `;
+      }
+
+      function renderSchedule() {
+        const now = today();
+        const key = dateToKey(now);
+        const day = getDay(key);
+        const track = normalizeComputerTrack(state.meta.computerTrack);
+        const jobDone = Boolean(day.runsheet.jobcore);
+        const meta = `<span>${escapeHtml(formatDate(now))}</span><span>${escapeHtml(weekday(now))}</span>`;
+        return `
+          ${sectionHead(8, "日程", "任何一天打开它，照着做。", meta)}
+          <section aria-label="铁律">
+            <div class="label">铁律</div>
+            <div class="schedule-rule-strip">
+              ${SCHEDULE_RULES.map((rule, index) => `
+                <div class="schedule-rule ${index === 1 ? "critical" : ""}">
+                  <span class="schedule-rule-number">${index + 1}</span>
+                  <span>${escapeHtml(rule)}</span>
+                </div>
+              `).join("")}
+            </div>
+          </section>
+          <div class="schedule-signal" aria-label="当天关键信号">
+            <span class="label">当天关键信号</span>
+            <strong>${jobDone ? "求职核心块已完成" : "求职核心块未完成"}</strong>
+          </div>
+          <section class="track-setting" aria-label="计算机方向">
+            <div>
+              <div class="label">计算机方向</div>
+              <p class="muted">还没怎么进面试，先走作品集向；开始接技术面，再转面试向。这 3 个月雅思优先，计算机维持轻量；雅思考完再加重。</p>
+            </div>
+            <div class="track-options" role="group" aria-label="计算机方向选择">
+              ${Object.entries(COMPUTER_TRACKS).map(([id, option]) => `
+                <button class="track-button" type="button" data-computer-track="${escapeHtml(id)}" aria-pressed="${id === track ? "true" : "false"}">${escapeHtml(option.label)}</button>
+              `).join("")}
+            </div>
+          </section>
+          <section aria-label="今日骨架">
+            <div class="label">今日骨架</div>
+            <div class="schedule-sheet">
+              ${RUNSHEET_BLOCKS.map((block) => renderScheduleBlock(block, day, now, track)).join("")}
+            </div>
+          </section>
+        `;
+      }
+
       function bindPageEvents() {
         if (state.route === "today") bindTodayEvents();
         if (state.route === "week") bindWeekEvents();
@@ -2726,6 +3062,7 @@
         if (state.route === "progress") bindProgressEvents();
         if (state.route === "archive") bindArchiveEvents();
         if (state.route === "habits") bindHabitEvents();
+        if (state.route === "schedule") bindScheduleEvents();
       }
 
       function bindTodayEvents() {
@@ -2934,6 +3271,34 @@
         });
       }
 
+      function bindScheduleEvents() {
+        document.querySelectorAll("[data-runsheet-block]").forEach((button) => {
+          button.addEventListener("click", () => {
+            const key = dateToKey(today());
+            const day = getDay(key);
+            const blockId = button.dataset.runsheetBlock;
+            day.runsheet = { ...day.runsheet };
+            if (day.runsheet[blockId]) {
+              delete day.runsheet[blockId];
+            } else {
+              day.runsheet[blockId] = true;
+            }
+            saveDay(key, day);
+            render();
+          });
+        });
+        document.querySelectorAll("[data-computer-track]").forEach((button) => {
+          button.addEventListener("click", () => {
+            state.meta = {
+              ...state.meta,
+              computerTrack: normalizeComputerTrack(button.dataset.computerTrack)
+            };
+            saveMeta(state.meta);
+            render();
+          });
+        });
+      }
+
       function fallbackCopy(text, element) {
         try {
           const helper = document.createElement("textarea");
@@ -3024,8 +3389,13 @@
           throw new Error("Invalid JSON");
         }
         let imported = 0;
-        if (payload.meta && keyToDate(payload.meta.start)) {
-          saveMeta({ start: payload.meta.start });
+        if (payload.meta && typeof payload.meta === "object") {
+          const nextMeta = { ...state.meta };
+          if (keyToDate(payload.meta.start)) nextMeta.start = payload.meta.start;
+          if (payload.meta.computerTrack === "portfolio" || payload.meta.computerTrack === "interview") {
+            nextMeta.computerTrack = payload.meta.computerTrack;
+          }
+          saveMeta(nextMeta);
         }
 
         const dayEntries = [];
@@ -3099,7 +3469,7 @@
         const startInput = document.getElementById("start-date");
         startInput.addEventListener("change", () => {
           if (!keyToDate(startInput.value)) return;
-          state.meta = { start: startInput.value };
+          state.meta = { ...state.meta, start: startInput.value };
           saveMeta(state.meta);
           state.selectedWeek = Math.max(1, currentWeekNumber());
           render();
@@ -3148,7 +3518,7 @@
         state.selectedWeek = Math.max(1, currentWeekNumber());
         window.addEventListener("hashchange", render);
         if (!window.location.hash) {
-          window.location.hash = "today";
+          window.location.hash = "schedule";
         }
         render();
         document.getElementById("loading").hidden = true;
