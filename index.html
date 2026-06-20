@@ -742,6 +742,9 @@
 
       .masthead,
       .week-brief,
+      .spine-thesis,
+      .spine-flow,
+      .spine-prompts,
       .metric-strip,
       .stats-grid,
       .field-grid,
@@ -981,6 +984,92 @@
       font-size: 1rem;
       line-height: 1.45;
       font-weight: 500;
+    }
+
+    .training-spine {
+      margin: 0 0 18px;
+      border: 1px solid var(--ink);
+      border-radius: 8px;
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .spine-thesis {
+      display: grid;
+      grid-template-columns: 92px minmax(0, 1fr);
+      gap: 16px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .spine-thesis strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: 1.18rem;
+      line-height: 1.34;
+      font-weight: 500;
+    }
+
+    .spine-thesis p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.58;
+    }
+
+    .spine-flow {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      border-bottom: 1px solid var(--line);
+    }
+
+    .spine-step {
+      min-height: 88px;
+      padding: 12px 11px;
+      border-right: 1px solid var(--line);
+    }
+
+    .spine-step:last-child {
+      border-right: 0;
+    }
+
+    .spine-step span {
+      display: block;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .spine-step b {
+      display: block;
+      margin-top: 5px;
+      font-size: 0.94rem;
+      line-height: 1.35;
+      font-weight: 600;
+    }
+
+    .spine-prompts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .spine-prompt {
+      padding: 12px 14px;
+      border-right: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .spine-prompt:nth-child(2n) {
+      border-right: 0;
+    }
+
+    .spine-prompt:nth-last-child(-n+2) {
+      border-bottom: 0;
     }
 
     .metric-strip,
@@ -1355,6 +1444,22 @@
         min-height: 112px;
       }
 
+      .spine-thesis {
+        gap: 8px;
+      }
+
+      .spine-step,
+      .spine-prompt,
+      .spine-prompt:nth-child(2n),
+      .spine-prompt:nth-last-child(-n+2) {
+        border-right: 0;
+        border-bottom: 1px solid var(--line-soft);
+      }
+
+      .spine-prompt:last-child {
+        border-bottom: 0;
+      }
+
       .margin-notes {
         grid-template-columns: 1fr;
       }
@@ -1363,6 +1468,31 @@
     @media (max-width: 430px) {
       .segments {
         grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .spine-thesis,
+      .spine-flow,
+      .spine-prompts {
+        grid-template-columns: 1fr;
+      }
+
+      .spine-thesis {
+        gap: 8px;
+      }
+
+      .spine-step,
+      .spine-prompt,
+      .spine-prompt:nth-child(2n),
+      .spine-prompt:nth-last-child(-n+2) {
+        border-right: 0;
+        border-bottom: 1px solid var(--line-soft);
+      }
+
+      .spine-step:last-child,
+      .spine-prompt:last-child {
+        border-bottom: 0;
       }
     }
   </style>
@@ -1375,7 +1505,7 @@
         <div>
           <div class="kicker">Personal Training Ledger</div>
           <h1 class="site-title">能力训练账本</h1>
-          <p class="site-subtitle">把思考、表达与职场沟通变成每天可记录、可复盘、可继续的训练。</p>
+          <p class="site-subtitle">不是来打卡；是练解释世界和与人共事。</p>
         </div>
         <div class="kicker" id="header-date"></div>
       </div>
@@ -1808,6 +1938,10 @@
         const storageText = state.storageMode === "localStorage" ? "localStorage" : "内存临时存储";
         return `
           <div class="margin-note">
+            <div class="label">Main Line</div>
+            <p>小事 → 宏观 → 结构 → 判断 → 表达 → 共事。</p>
+          </div>
+          <div class="margin-note">
             <div class="label">Current Folio</div>
             <p>${escapeHtml(plan.weekLabel)} · ${escapeHtml(plan.title)}</p>
           </div>
@@ -1823,6 +1957,45 @@
             <div class="label">Storage</div>
             <p>${storageText} · 数据只留在本浏览器。</p>
           </div>
+        `;
+      }
+
+      function renderTrainingSpine() {
+        const steps = [
+          ["01", "从日常小事出发"],
+          ["02", "找到背后的宏观变化"],
+          ["03", "追到中间结构"],
+          ["04", "判断耦合与调整代价"],
+          ["05", "压缩成英文判断"],
+          ["06", "用好共事的方式沟通"]
+        ];
+        const prompts = [
+          "今天这件小事，背后的社会变化是什么？",
+          "宏观力量通过什么制度、平台、流程或关系影响到个人生活？",
+          "这里是牵一发而动全身，还是只是可以改掉的噪音？",
+          "我能不能把判断说清楚，并让同事觉得我肯学、靠谱、不难共事？"
+        ];
+        return `
+          <section class="training-spine" aria-labelledby="training-spine-title">
+            <div class="spine-thesis">
+              <div class="label">Main Line</div>
+              <div>
+                <strong id="training-spine-title">不是来打卡，是练一条完整能力链：解释世界，吸收信息，表达判断，与人共事。</strong>
+                <p>每天的六段训练都服务于同一件事：把小事背后的结构看清楚，把大量信息变成自己的判断，再用英语和职场语言说出来。</p>
+              </div>
+            </div>
+            <div class="spine-flow" aria-label="训练主线六步">
+              ${steps.map(([number, text]) => `
+                <div class="spine-step">
+                  <span>${number}</span>
+                  <b>${escapeHtml(text)}</b>
+                </div>
+              `).join("")}
+            </div>
+            <div class="spine-prompts">
+              ${prompts.map((prompt) => `<div class="spine-prompt">${escapeHtml(prompt)}</div>`).join("")}
+            </div>
+          </section>
         `;
       }
 
@@ -1847,6 +2020,7 @@
         const meta = `<span>${escapeHtml(formatDate(today()))}</span><span>${escapeHtml(weekday(today()))}</span><span>${escapeHtml(plan.weekLabel)}</span>`;
         return `
           ${sectionHead(1, "今天", "每日训练的单页账本。", meta)}
+          ${renderTrainingSpine()}
           <div class="week-brief">
             <div class="brief-cell">
               <span class="label">Theme</span>
