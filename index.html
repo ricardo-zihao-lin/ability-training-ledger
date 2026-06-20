@@ -82,8 +82,8 @@
       outline-offset: -2px;
     }
 
-    .segment-button[aria-pressed="true"] .box::before, .checkmark.done::before {
-      content: "X";
+    .segment-button[aria-pressed="true"] .box::before, .habit-item[aria-pressed="true"] .box::before, .checkmark.done::before {
+      content: "✓";
     }
 
     .field {
@@ -102,7 +102,7 @@
       color: var(--ink);
     }
 
-    textarea:focus-visible, input:focus-visible, .button:focus-visible {
+    textarea:focus-visible, input:focus-visible, select:focus-visible, .button:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 2px;
     }
@@ -215,7 +215,7 @@
     }
 
     @media (max-width: 680px) {
-      .masthead, .week-brief, .spine-thesis, .spine-flow, .spine-prompts, .metric-strip, .stats-grid, .field-grid, .settings-grid {
+      .masthead, .week-brief, .metric-strip, .stats-grid, .field-grid, .settings-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -290,7 +290,7 @@
       position: sticky;
       top: 0;
       z-index: 10;
-      margin: 0 0 30px;
+      margin: 0 0 22px;
       padding: 16px 0 0;
       background: var(--paper);
     }
@@ -404,7 +404,7 @@
     }
 
     .section-head {
-      margin-bottom: 20px;
+      margin-bottom: 12px;
       padding-bottom: 16px;
       border-bottom: 1px solid var(--line-soft);
     }
@@ -419,7 +419,7 @@
       font-family: var(--serif);
     }
 
-    h1, h2, h3, .site-title, .section-head h2, .week-title, .spine-thesis strong {
+    h1, h2, h3, .site-title, .section-head h2, .week-title {
       text-wrap: balance;
     }
 
@@ -442,13 +442,14 @@
     }
 
     .week-brief {
-      display: grid;
-      grid-template-columns: 0.92fr 1.08fr 1.2fr;
-      gap: 16px;
-      margin-bottom: 22px;
-      padding: 18px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 5px 14px;
+      margin-bottom: 8px;
+      padding: 7px 10px;
       border: 1px solid var(--ink);
-      border-radius: 8px;
+      border-radius: 6px;
       background: var(--ink);
       color: var(--paper);
     }
@@ -457,105 +458,21 @@
       border-top: 0;
       padding-top: 0;
       min-width: 0;
+      flex: 1 1 170px;
     }
 
     .brief-cell .label {
       color: #B8C6BC;
+      margin-right: 5px;
     }
 
     .brief-cell strong {
-      display: block;
-      margin-top: 6px;
-      font-size: 1rem;
+      display: inline;
+      margin-top: 0;
+      font-size: 0.82rem;
       font-weight: 500;
       color: var(--paper);
-      line-height: 1.45;
-    }
-
-    .training-spine {
-      margin: 0 0 18px;
-      border: 1px solid var(--ink);
-      border-radius: 8px;
-      background: var(--surface);
-      overflow: hidden;
-    }
-
-    .spine-thesis {
-      display: grid;
-      grid-template-columns: 92px minmax(0, 1fr);
-      gap: 16px;
-      padding: 16px 18px;
-      border-bottom: 1px solid var(--ink);
-    }
-
-    .spine-thesis strong {
-      display: block;
-      font-family: var(--serif);
-      font-size: 1.18rem;
-      line-height: 1.34;
-      font-weight: 500;
-    }
-
-    .spine-thesis p {
-      margin: 7px 0 0;
-      color: var(--muted);
-      font-size: 0.94rem;
-      line-height: 1.58;
-    }
-
-    .spine-flow {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      border-bottom: 1px solid var(--line);
-    }
-
-    .spine-step {
-      min-height: 88px;
-      padding: 12px 11px;
-      border-right: 1px solid var(--line);
-    }
-
-    .spine-step:last-child {
-      border-right: 0;
-    }
-
-    .spine-step span {
-      display: block;
-      color: var(--accent);
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .spine-step b {
-      display: block;
-      margin-top: 5px;
-      font-size: 0.94rem;
-      line-height: 1.35;
-      font-weight: 600;
-    }
-
-    .spine-prompts {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .spine-prompt {
-      padding: 12px 14px;
-      border-right: 1px solid var(--line-soft);
-      border-bottom: 1px solid var(--line-soft);
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-
-    .spine-prompt:nth-child(2n) {
-      border-right: 0;
-    }
-
-    .spine-prompt:nth-last-child(-n+2) {
-      border-bottom: 0;
+      line-height: 1.32;
     }
 
     .metric-strip, .stats-grid {
@@ -589,11 +506,48 @@
       color: var(--accent);
     }
 
+    .today-metrics {
+      gap: 0;
+      margin: 0 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .today-metrics .metric {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      border: 0;
+      border-right: 1px solid var(--line-soft);
+      border-radius: 0;
+      padding: 8px 12px;
+      background: transparent;
+      text-align: left;
+    }
+
+    .today-metrics .metric:last-child {
+      border-right: 0;
+    }
+
+    .today-metrics .metric-value {
+      display: inline;
+      margin-top: 0;
+      font-size: 1.12rem;
+      line-height: 1.1;
+    }
+
     .ledger-panel, .ledger-list, .template-item, .plan-week, .settings-panel {
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
       padding: 18px 0;
       border-color: var(--line-soft);
+    }
+
+    .daily-engine-panel {
+      padding: 12px 0;
     }
 
     .segments {
@@ -604,6 +558,12 @@
       margin: 14px 0 8px;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       border: 0;
+    }
+
+    .daily-engine-panel .segments {
+      gap: 8px;
+      margin: 8px 0 0;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
     }
 
     .segment-button {
@@ -617,8 +577,8 @@
       cursor: pointer;
       grid-template-columns: 26px minmax(0, 1fr);
       gap: 8px 10px;
-      min-height: 120px;
-      padding: 15px 13px;
+      min-height: 104px;
+      padding: 12px 13px;
       border: 1px solid var(--line);
       background: var(--surface);
       grid-template-rows: auto auto;
@@ -629,6 +589,14 @@
       border-color: var(--ink);
       background: var(--ink);
       color: var(--paper);
+    }
+
+    .daily-engine-panel .segment-button {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      min-height: 66px;
+      padding: 9px 8px;
+      text-align: center;
     }
 
     .segment-button:hover {
@@ -667,15 +635,11 @@
       font-weight: 600;
     }
 
-    .segment-desc {
-      display: block;
-      margin-top: 4px;
-      color: var(--muted);
-      font-size: 0.84rem;
-      line-height: 1.45;
+    .daily-engine-panel .segment-title {
+      font-size: 0.98rem;
     }
 
-    .segment-button[aria-pressed="true"] .segment-desc, .segment-button[aria-pressed="true"] .segment-code {
+    .segment-button[aria-pressed="true"] .segment-code {
       color: #B8C6BC;
     }
 
@@ -689,6 +653,11 @@
       grid-column: 2;
     }
 
+    .daily-engine-panel .segment-code {
+      font-size: 0.62rem;
+      grid-column: auto;
+    }
+
     .field-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -696,13 +665,20 @@
       margin-top: 20px;
     }
 
-    textarea, input[type="date"], input[type="file"] {
+    textarea, input[type="date"], input[type="search"], input[type="file"], select {
       width: 100%;
       border: 1px solid var(--line);
       color: var(--ink);
       background: var(--surface);
       border-radius: 8px;
       border-color: var(--line);
+    }
+
+    input[type="search"], select {
+      min-height: 42px;
+      padding: 8px 10px;
+      font-family: var(--cjk);
+      font-size: 0.95rem;
     }
 
     textarea {
@@ -712,6 +688,65 @@
       padding: 12px 13px;
       font-family: var(--cjk);
       font-size: 0.95rem;
+    }
+
+    .analysis-panel {
+      margin-top: 20px;
+    }
+
+    .daily-engine-panel + .analysis-panel {
+      margin-top: 10px;
+    }
+
+    .analysis-panel > p {
+      max-width: var(--measure);
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.45;
+    }
+
+    .analysis-panel h3 {
+      margin: 4px 0 0;
+      font-family: var(--serif);
+      font-size: 1.28rem;
+      font-weight: 500;
+      line-height: 1.25;
+    }
+
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .analysis-field {
+      min-width: 0;
+      border: 1px solid var(--line-soft);
+      border-radius: 8px;
+      background: var(--surface);
+      padding: 12px;
+    }
+
+    .analysis-field label {
+      display: block;
+      margin-bottom: 7px;
+    }
+
+    .analysis-field textarea {
+      min-height: 110px;
+      border-radius: 6px;
+      background: var(--paper);
+    }
+
+    .analysis-field.conclusion {
+      grid-column: 1 / -1;
+    }
+
+    .analysis-field.conclusion textarea {
+      min-height: 86px;
+      font-size: 1rem;
     }
 
     .button {
@@ -748,6 +783,23 @@
       color: var(--paper);
       background: var(--accent-deep);
       border-color: var(--accent-deep);
+    }
+
+    .manual-save-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 14px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .save-status {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.04em;
     }
 
     .week-controls {
@@ -1061,6 +1113,187 @@
       border-bottom-color: var(--line-soft);
     }
 
+    .archive-controls {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(160px, 0.34fr);
+      gap: 12px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+
+    .archive-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .archive-item {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      border-color: var(--line-soft);
+      background: var(--surface);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .archive-toggle {
+      display: grid;
+      grid-template-columns: 138px minmax(0, 1fr);
+      gap: 16px;
+      width: 100%;
+      padding: 14px 16px;
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .archive-toggle:hover, .archive-toggle:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+      background: var(--paper);
+    }
+
+    .archive-meta {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      line-height: 1.55;
+      text-transform: uppercase;
+    }
+
+    .archive-title {
+      display: block;
+      font-family: var(--serif);
+      font-size: 1.16rem;
+      font-weight: 500;
+      line-height: 1.38;
+    }
+
+    .archive-full {
+      display: none;
+      padding: 0 16px 15px 170px;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .archive-item.expanded .archive-full {
+      display: block;
+    }
+
+    .archive-fields {
+      margin: 0;
+      padding: 12px 0 0;
+    }
+
+    .archive-fields div {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .archive-fields div:last-child {
+      border-bottom: 0;
+    }
+
+    .archive-fields dt {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-variant-caps: small-caps;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .archive-fields dd {
+      margin: 0;
+      color: var(--ink);
+      white-space: pre-wrap;
+    }
+
+    .habit-section {
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+    }
+
+    .habit-section + .habit-section {
+      margin-top: 30px;
+    }
+
+    .habit-section h3 {
+      margin: 0 0 12px;
+      color: var(--accent);
+      font-family: var(--serif);
+      font-size: 1.24rem;
+      font-weight: 500;
+      line-height: 1.25;
+    }
+
+    .habit-list {
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .habit-item {
+      display: grid;
+      grid-template-columns: 24px minmax(0, 1fr);
+      gap: 10px 12px;
+      width: 100%;
+      padding: 12px 0;
+      border: 0;
+      border-bottom: 1px solid var(--line-soft);
+      background: transparent;
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .habit-item:hover, .habit-item:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      background: var(--surface);
+    }
+
+    .habit-item[aria-pressed="true"] .box {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--paper);
+    }
+
+    .habit-action {
+      display: block;
+      font-weight: 600;
+      line-height: 1.38;
+    }
+
+    .habit-desc, .habit-date {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .habit-date {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .habit-id {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-variant-caps: small-caps;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
     .settings-panel {
       padding: 17px 18px;
       border: 1px solid var(--line);
@@ -1192,7 +1425,7 @@
     }
 
     @media (max-width: 680px) {
-      .week-brief, .metric-strip, .stats-grid, .field-grid, .settings-grid {
+      .week-brief, .metric-strip, .stats-grid, .field-grid, .analysis-grid, .settings-grid, .archive-controls {
         grid-template-columns: 1fr;
       }
     }
@@ -1204,9 +1437,15 @@
     }
 
     @media (max-width: 680px) {
+      .daily-engine-panel .segments {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 680px) {
       .segment-button {
         grid-template-columns: 30px minmax(0, 1fr);
-        min-height: 112px;
+        min-height: 104px;
       }
     }
 
@@ -1217,7 +1456,12 @@
     }
 
     @media (max-width: 680px) {
-      .spine-prompt:last-child {
+      .today-metrics .metric {
+        border-right: 0;
+        border-bottom: 1px solid var(--line-soft);
+      }
+
+      .today-metrics .metric:last-child {
         border-bottom: 0;
       }
     }
@@ -1234,28 +1478,22 @@
       }
     }
 
+    @media (max-width: 430px) {
+      .daily-engine-panel .segments {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 680px) {
-      .spine-thesis, .spine-flow, .spine-prompts {
+      .archive-toggle, .archive-fields div {
         grid-template-columns: 1fr;
+        gap: 6px;
       }
     }
 
     @media (max-width: 680px) {
-      .spine-thesis {
-        gap: 8px;
-      }
-    }
-
-    @media (max-width: 680px) {
-      .spine-step, .spine-prompt, .spine-prompt:nth-child(2n), .spine-prompt:nth-last-child(-n+2) {
-        border-right: 0;
-        border-bottom: 1px solid var(--line-soft);
-      }
-    }
-
-    @media (max-width: 680px) {
-      .spine-step:last-child, .spine-prompt:last-child {
-        border-bottom: 0;
+      .archive-full {
+        padding: 0 16px 15px;
       }
     }
 
@@ -1275,7 +1513,7 @@
       .margin-notes,
       .site-footer,
       .button-row,
-      .training-spine,
+      .archive-controls,
       .week-brief,
       .settings-panel {
         display: none !important;
@@ -1290,6 +1528,8 @@
       .phase-title,
       .week-number,
       .definition-list dt,
+      .archive-meta,
+      .archive-fields dt,
       .reflection-cell,
       .reflection-date {
         color: #000 !important;
@@ -1309,10 +1549,25 @@
       .week-edit-panel,
       .heatmap-shell,
       .reflection-list,
+      .archive-item,
+      .archive-full,
       .plan-week,
       .template-item {
         border-color: #000;
         background: transparent;
+      }
+
+      .archive-full {
+        display: block !important;
+        padding: 0 0 12px;
+      }
+
+      .archive-toggle {
+        padding: 10px 0;
+      }
+
+      .archive-fields div {
+        border-color: #000;
       }
 
       table {
@@ -1354,7 +1609,7 @@
         <div>
           <div class="kicker">Personal Training Ledger</div>
           <h1 class="site-title">能力训练账本</h1>
-          <p class="site-subtitle">不是来打卡；是练解释世界和与人共事。</p>
+          <p class="site-subtitle">记录每天的思考、表达与职场沟通训练。</p>
         </div>
         <div class="kicker" id="header-date"></div>
       </div>
@@ -1364,6 +1619,8 @@
         <a class="nav-link" href="#plan" data-route="plan">§3 计划</a>
         <a class="nav-link" href="#templates" data-route="templates">§4 模板</a>
         <a class="nav-link" href="#progress" data-route="progress">§5 进度</a>
+        <a class="nav-link" href="#archive" data-route="archive">§6 回顾</a>
+        <a class="nav-link" href="#habits" data-route="habits">§7 习惯</a>
       </nav>
     </header>
     <div class="layout">
@@ -1371,7 +1628,7 @@
       <aside id="margin-notes" class="margin-notes" aria-label="页边注"></aside>
     </div>
     <footer class="site-footer">
-      低调署名：<a href="https://github.com/你的用户名">https://github.com/你的用户名</a>
+      低调署名：<a href="https://github.com/ricardo-zihao-lin">https://github.com/ricardo-zihao-lin</a>
     </footer>
   </div>
   <script>
@@ -1381,8 +1638,10 @@
       const APP = "ability-trainer:v1";
       const META_KEY = `${APP}:meta`;
       const DAY_PREFIX = `${APP}:day:`;
+      const WEEK_HABITS_PREFIX = `${APP}:weekhabits:`;
+      const ONCE_HABITS_KEY = `${APP}:oncehabits`;
       const DAY_MS = 86400000;
-      const ROUTES = ["today", "week", "plan", "templates", "progress"];
+      const ROUTES = ["today", "week", "plan", "templates", "progress", "archive", "habits"];
 
       const SEGMENTS = [
         { id: "input", zh: "输入", en: "Input", desc: "读、听或观察，留下一个真实问题。" },
@@ -1391,6 +1650,64 @@
         { id: "organize", zh: "整理", en: "Organize", desc: "把信息压成一页或三句话。" },
         { id: "comms", zh: "沟通", en: "Comms", desc: "练一次提问、求助或反馈回应。" },
         { id: "review", zh: "复盘", en: "Review", desc: "记录一句今天的判断。" }
+      ];
+
+      const ANALYSIS_FIELDS = [
+        { id: "subject", label: "Subject", title: "这件小事(要具体)" },
+        { id: "origin", label: "Origin", title: "来历:当年为什么出现" },
+        { id: "structure", label: "Structure", title: "通过什么中间结构" },
+        { id: "conditions", label: "Conditions", title: "当年条件是否还成立" },
+        { id: "coupling", label: "Coupling", title: "耦合:真·牵一发 vs 草台班子" },
+        { id: "conclusion", label: "Conclusion", title: "一句话结论" }
+      ];
+
+      const HABIT_GROUPS = [
+        {
+          id: "daily",
+          title: "每天",
+          label: "Daily",
+          items: [
+            { id: "wake_now", action: "闹钟响起立刻起床", desc: "和自己讨价还价，只会毁掉全新的一天。" },
+            { id: "hard_first", action: "先花30分钟做一件困难的事，再娱乐", desc: "先生产，后享受。" },
+            { id: "train_anyway", action: "哪怕不想动，也完成今天的训练", desc: "真正的纪律，在这种时刻诞生。" },
+            { id: "focus_one_hour", action: "专注一小时只做一件事，不切标签页或 App", desc: "" },
+            { id: "write_learned", action: "写下今天学到的东西", desc: "深度思考和认真写作，几乎是同一件事。" },
+            { id: "meal_no_screen", action: "认真吃一顿饭，面前不放任何屏幕", desc: "品尝食物，而不是刷算法。" },
+            { id: "eat_slow", action: "吃饭时故意放慢速度", desc: "匆忙，早已成为一种隐形瘾。" },
+            { id: "eye_contact", action: "别人说话时，专注看着对方的眼睛", desc: "真正的注意力，是最珍贵的礼物。" },
+            { id: "phone_out_bedroom", action: "今晚把手机放在卧室外面", desc: "睡眠质量会明显提升。" },
+            { id: "sit_still_10", action: "静静坐10分钟，什么也不做", desc: "听起来简单，做起来却很难。" }
+          ]
+        },
+        {
+          id: "weekly",
+          title: "每周",
+          label: "Weekly",
+          items: [
+            { id: "morning_no_phone", action: "完整度过一个早晨，完全不碰手机", desc: "重新找回独立思考的清晰感。" },
+            { id: "afternoon_no_social", action: "用一个下午远离社交媒体", desc: "你会发现自己找回了多少时间。" },
+            { id: "walk_no_audio", action: "步行30分钟，不听音乐或播客", desc: "真正的沉默，是最强的复位工具。" },
+            { id: "wander_walk", action: "漫无目的地散步半小时", desc: "有时候，刻意迷失正是最好的前进。" },
+            { id: "read_30", action: "阅读一本书的30页", desc: "专注力会慢慢苏醒。" },
+            { id: "learn_skill_hour", action: "花一小时学习一项全新技能", desc: "大脑最渴望真实的挑战。" },
+            { id: "documentary", action: "看一部纪录片，而不是刷剧集", desc: "优质娱乐与深度学习可以并存。" },
+            { id: "deep_dive", action: "深入研究一个长期好奇的话题", desc: "追随好奇心，而不是跟着算法。" },
+            { id: "call_someone", action: "打电话给某人，而不是只发消息", desc: "人声里有文字传不出的温度。" },
+            { id: "watch_sunset", action: "完整看一次日落，不拿手机", desc: "并非所有美好都要拍成内容。" },
+            { id: "sleep_early", action: "比平时早一小时睡觉", desc: "长期的疲惫，是最隐秘的盗贼。" }
+          ]
+        },
+        {
+          id: "once",
+          title: "一次",
+          label: "One-time",
+          items: [
+            { id: "notif_off_24", action: "关闭所有通知，持续24小时", desc: "多数所谓紧急，只是廉价干扰。" },
+            { id: "finish_procrastinated", action: "完成一项拖延了好几周的任务", desc: "停止逃避，能量自然回来。" },
+            { id: "one_idea_for_life", action: "记住一个能陪伴一生的深刻想法", desc: "最强的工具，往往浓缩成一句话。" },
+            { id: "real_memories_day", action: "花一整天积累真实回忆，而不是制造内容", desc: "生命结束时，你真正记住的只有那些时刻。" }
+          ]
+        }
       ];
 
       const WEEK_PLANS = [
@@ -1457,7 +1774,11 @@
         clearTimer: null,
         flash: "",
         weekEditDate: null,
-        expandedReflections: new Set()
+        expandedReflections: new Set(),
+        expandedArchive: new Set(),
+        archiveQuery: "",
+        archiveWeek: "all",
+        focusTodayAnalysis: false
       };
 
       function pad(number) {
@@ -1604,14 +1925,52 @@
         }, {});
       }
 
+      function defaultAnalysis() {
+        return ANALYSIS_FIELDS.reduce((acc, field) => {
+          acc[field.id] = "";
+          return acc;
+        }, {});
+      }
+
+      function habitItemsFor(groupId) {
+        const group = HABIT_GROUPS.find((entry) => entry.id === groupId);
+        return group ? group.items : [];
+      }
+
+      function habitIdsFor(groupId) {
+        return habitItemsFor(groupId).map((item) => item.id);
+      }
+
+      function normalizeHabitMap(value, ids) {
+        const source = value && typeof value === "object" ? value : {};
+        return ids.reduce((acc, id) => {
+          if (source[id]) acc[id] = true;
+          return acc;
+        }, {});
+      }
+
+      function normalizeOnceHabits(value) {
+        const source = value && typeof value === "object" ? value : {};
+        return habitIdsFor("once").reduce((acc, id) => {
+          if (typeof source[id] === "string" && keyToDate(source[id])) acc[id] = source[id];
+          return acc;
+        }, {});
+      }
+
       function normalizeDay(value) {
         const source = value && typeof value === "object" ? value : {};
         const incomingSeg = source.seg && typeof source.seg === "object" ? source.seg : {};
+        const incomingAnalysis = source.analysis && typeof source.analysis === "object" ? source.analysis : {};
         return {
           seg: SEGMENTS.reduce((acc, segment) => {
             acc[segment.id] = Boolean(incomingSeg[segment.id]);
             return acc;
           }, {}),
+          analysis: ANALYSIS_FIELDS.reduce((acc, field) => {
+            acc[field.id] = typeof incomingAnalysis[field.id] === "string" ? incomingAnalysis[field.id] : "";
+            return acc;
+          }, defaultAnalysis()),
+          habits: normalizeHabitMap(source.habits, habitIdsFor("daily")),
           note: typeof source.note === "string" ? source.note : "",
           reflection: typeof source.reflection === "string" ? source.reflection : "",
           updatedAt: typeof source.updatedAt === "string" ? source.updatedAt : ""
@@ -1640,6 +1999,26 @@
         writeRaw(META_KEY, JSON.stringify({ start: meta.start }));
       }
 
+      function weekHabitsStorageKey(weekNumber = currentWeekNumber()) {
+        return `${WEEK_HABITS_PREFIX}${weekNumber}`;
+      }
+
+      function getWeekHabits(weekNumber = currentWeekNumber()) {
+        return normalizeHabitMap(parseJSON(readRaw(weekHabitsStorageKey(weekNumber))), habitIdsFor("weekly"));
+      }
+
+      function saveWeekHabits(weekNumber, habits) {
+        writeRaw(weekHabitsStorageKey(weekNumber), JSON.stringify(normalizeHabitMap(habits, habitIdsFor("weekly"))));
+      }
+
+      function getOnceHabits() {
+        return normalizeOnceHabits(parseJSON(readRaw(ONCE_HABITS_KEY)));
+      }
+
+      function saveOnceHabits(habits) {
+        writeRaw(ONCE_HABITS_KEY, JSON.stringify(normalizeOnceHabits(habits)));
+      }
+
       function allDayKeys() {
         return Array.from(new Set(
           listStorageKeys()
@@ -1647,6 +2026,15 @@
             .map((key) => key.slice(DAY_PREFIX.length))
             .filter((key) => keyToDate(key))
         )).sort();
+      }
+
+      function allWeekHabitKeys() {
+        return Array.from(new Set(
+          listStorageKeys()
+            .filter((key) => key.startsWith(WEEK_HABITS_PREFIX))
+            .map((key) => key.slice(WEEK_HABITS_PREFIX.length))
+            .filter((key) => /^-?\d+$/.test(key))
+        )).sort((a, b) => Number(a) - Number(b));
       }
 
       function completionCount(day) {
@@ -1667,6 +2055,34 @@
 
       function planForWeek(weekNumber) {
         return WEEK_PLANS.find((plan) => plan.week === weekNumber) || null;
+      }
+
+      function weekLabelForDate(date) {
+        const weekNumber = currentWeekNumber(date);
+        return weekNumber < 1 ? "未开始" : `第 ${weekNumber} 周`;
+      }
+
+      function hasAnalysis(day) {
+        return ANALYSIS_FIELDS.some((field) => day.analysis[field.id].trim());
+      }
+
+      function analysisSearchText(day) {
+        return ANALYSIS_FIELDS.map((field) => day.analysis[field.id]).join("\n").toLowerCase();
+      }
+
+      function renderAnalysisFields(day, prefix, dataset = "") {
+        return `
+          <div class="analysis-grid">
+            ${ANALYSIS_FIELDS.map((field) => `
+              <div class="analysis-field ${field.id === "conclusion" ? "conclusion" : ""}">
+                <label class="label" for="${prefix}-analysis-${field.id}">
+                  ${escapeHtml(field.label)} · ${escapeHtml(field.title)}
+                </label>
+                <textarea id="${prefix}-analysis-${field.id}" data-analysis-field="${field.id}" ${dataset} autocomplete="off">${escapeHtml(day.analysis[field.id])}</textarea>
+              </div>
+            `).join("")}
+          </div>
+        `;
       }
 
       function todayPlan() {
@@ -1776,7 +2192,9 @@
           week: renderWeek,
           plan: renderPlan,
           templates: renderTemplates,
-          progress: renderProgress
+          progress: renderProgress,
+          archive: renderArchive,
+          habits: renderHabits
         }[state.route]();
 
         document.getElementById("margin-notes").innerHTML = renderMarginNotes();
@@ -1790,7 +2208,7 @@
         return `
           <div class="margin-note">
             <div class="label">Main Line</div>
-            <p>小事 → 宏观 → 结构 → 判断 → 表达 → 共事。</p>
+            <p>解释世界，吸收信息，表达判断，与人共事。</p>
           </div>
           <div class="margin-note">
             <div class="label">Current Folio</div>
@@ -1811,51 +2229,12 @@
         `;
       }
 
-      function renderTrainingSpine() {
-        const steps = [
-          ["01", "从日常小事出发"],
-          ["02", "找到背后的宏观变化"],
-          ["03", "追到中间结构"],
-          ["04", "判断耦合与调整代价"],
-          ["05", "压缩成英文判断"],
-          ["06", "用好共事的方式沟通"]
-        ];
-        const prompts = [
-          "今天这件小事，背后的社会变化是什么？",
-          "宏观力量通过什么制度、平台、流程或关系影响到个人生活？",
-          "这里是牵一发而动全身，还是只是可以改掉的噪音？",
-          "我能不能把判断说清楚，并让同事觉得我肯学、靠谱、不难共事？"
-        ];
-        return `
-          <section class="training-spine" aria-labelledby="training-spine-title">
-            <div class="spine-thesis">
-              <div class="label">Main Line</div>
-              <div>
-                <strong id="training-spine-title">不是来打卡，是练一条完整能力链：解释世界，吸收信息，表达判断，与人共事。</strong>
-                <p>每天的六段训练都服务于同一件事：把小事背后的结构看清楚，把大量信息变成自己的判断，再用英语和职场语言说出来。</p>
-              </div>
-            </div>
-            <div class="spine-flow" aria-label="训练主线六步">
-              ${steps.map(([number, text]) => `
-                <div class="spine-step">
-                  <span>${number}</span>
-                  <b>${escapeHtml(text)}</b>
-                </div>
-              `).join("")}
-            </div>
-            <div class="spine-prompts">
-              ${prompts.map((prompt) => `<div class="spine-prompt">${escapeHtml(prompt)}</div>`).join("")}
-            </div>
-          </section>
-        `;
-      }
-
       function sectionHead(number, title, subtitle, meta = "") {
         return `
           <section class="section-head">
             <div class="kicker">§${number}</div>
             <h2>${escapeHtml(title)}</h2>
-            <p>${escapeHtml(subtitle)}</p>
+            ${subtitle ? `<p>${escapeHtml(subtitle)}</p>` : ""}
             ${meta ? `<div class="meta-line">${meta}</div>` : ""}
           </section>
         `;
@@ -1870,8 +2249,7 @@
         const completeText = count >= 4 ? "达标" : "未达标";
         const meta = `<span>${escapeHtml(formatDate(today()))}</span><span>${escapeHtml(weekday(today()))}</span><span>${escapeHtml(plan.weekLabel)}</span>`;
         return `
-          ${sectionHead(1, "今天", "每日训练的单页账本。", meta)}
-          ${renderTrainingSpine()}
+          ${sectionHead(1, "今天", "", meta)}
           <div class="week-brief">
             <div class="brief-cell">
               <span class="label">Theme</span>
@@ -1886,7 +2264,7 @@
               <strong>${escapeHtml(plan.daily)}</strong>
             </div>
           </div>
-          <div class="metric-strip" aria-label="今日统计">
+          <div class="metric-strip today-metrics" aria-label="今日统计">
             <div class="metric">
               <span class="label">Completed</span>
               <span class="metric-value">${count}/6</span>
@@ -1900,30 +2278,39 @@
               <span class="metric-value ${count >= 4 ? "good" : ""}">${completeText}</span>
             </div>
           </div>
-          <div class="ledger-panel">
+          <div class="ledger-panel daily-engine-panel">
             <div class="label">Daily Engine</div>
             <div class="segments">
               ${SEGMENTS.map((segment) => `
-                <button class="segment-button" type="button" data-segment="${segment.id}" aria-pressed="${day.seg[segment.id] ? "true" : "false"}">
+                <button class="segment-button" type="button" data-segment="${segment.id}" aria-pressed="${day.seg[segment.id] ? "true" : "false"}" aria-label="${escapeHtml(segment.zh)} ${escapeHtml(segment.en)}：${escapeHtml(segment.desc)}">
                   <span class="box" aria-hidden="true"></span>
                   <span>
                     <span class="segment-title">${escapeHtml(segment.zh)}</span>
-                    <span class="segment-desc">${escapeHtml(segment.desc)}</span>
                   </span>
                   <span class="segment-code">${escapeHtml(segment.en)}</span>
                 </button>
               `).join("")}
             </div>
           </div>
+          <section class="ledger-panel analysis-panel" aria-labelledby="today-analysis-title">
+            <div class="label">Daily Analysis</div>
+            <h3 id="today-analysis-title">今日分析</h3>
+            <p>小事 → 宏观 → 结构 → 判断 → 表达 → 共事。</p>
+            ${renderAnalysisFields(day, "today", "data-today-analysis")}
+          </section>
           <div class="field-grid">
             <div class="field">
-              <label class="label" for="today-note">今日笔记</label>
+              <label class="label" for="today-note">今日产出 / 补充</label>
               <textarea id="today-note" autocomplete="off">${escapeHtml(day.note)}</textarea>
             </div>
             <div class="field">
               <label class="label" for="today-reflection">一句反思</label>
               <textarea id="today-reflection" autocomplete="off">${escapeHtml(day.reflection)}</textarea>
             </div>
+          </div>
+          <div class="manual-save-row">
+            <button class="button primary" type="button" data-save-today>保存到本机</button>
+            <span class="save-status" id="today-save-status">${state.storageMode === "localStorage" ? "自动保存开启 · 本机浏览器" : "自动保存开启 · 内存临时存储"}</span>
           </div>
         `;
       }
@@ -1941,7 +2328,7 @@
         const label = selected === currentWeek ? `第 ${selected} 周 · 当前周` : `第 ${selected} 周`;
         const review = plan ? plan.review : "计划周期外：沿用第 12 周复盘方式，整理下一季计划。";
         return `
-          ${sectionHead(2, "本周", "七天训练账本的只读汇总。", `<span>${escapeHtml(label)}</span><span>${escapeHtml(formatShortDate(start))} - ${escapeHtml(formatShortDate(addDays(start, 6)))}</span>`)}
+          ${sectionHead(2, "本周", "七天训练账本与补录入口。", `<span>${escapeHtml(label)}</span><span>${escapeHtml(formatShortDate(start))} - ${escapeHtml(formatShortDate(addDays(start, 6)))}</span>`)}
           <div class="week-controls">
             <h3 class="week-title">${escapeHtml(label)}</h3>
             <div class="button-row">
@@ -1994,7 +2381,7 @@
               </tbody>
             </table>
           </div>
-          ${editKey ? renderWeekDayEditor(editKey) : `<div class="notice">点按某一天，可编辑那天的打卡、分析/笔记与一句反思。</div>`}
+          ${editKey ? renderWeekDayEditor(editKey) : `<div class="notice">点按某一天，可编辑那天的打卡、每日分析、今日产出与一句反思。</div>`}
         `;
       }
 
@@ -2028,9 +2415,14 @@
                 </button>
               `).join("")}
             </div>
+            <section class="analysis-panel" aria-labelledby="week-analysis-title">
+              <div class="label">Daily Analysis</div>
+              <h3 id="week-analysis-title">每日分析日志</h3>
+              ${renderAnalysisFields(day, "week", `data-week-edit-analysis data-week-edit-date="${key}"`)}
+            </section>
             <div class="field-grid">
               <div class="field">
-                <label class="label" for="week-note">分析 / 今日笔记</label>
+                <label class="label" for="week-note">今日产出 / 补充</label>
                 <textarea id="week-note" data-week-edit-field="note" data-week-edit-date="${key}" autocomplete="off">${escapeHtml(day.note)}</textarea>
               </div>
               <div class="field">
@@ -2082,7 +2474,10 @@
               <article class="template-item">
                 <div class="template-head">
                   <h3>${escapeHtml(template.title)}</h3>
-                  <button class="button" type="button" data-copy-template="${index}">复制</button>
+                  <div class="button-row">
+                    ${index === 0 ? `<button class="button primary" type="button" data-use-analysis-template>用此模板填今天</button>` : ""}
+                    <button class="button" type="button" data-copy-template="${index}">复制</button>
+                  </div>
                 </div>
                 <pre class="template-body ${template.mode === "code" ? "code" : ""}" id="template-${index}">${escapeHtml(template.text)}</pre>
               </article>
@@ -2182,15 +2577,182 @@
         `;
       }
 
+      function archiveEntries() {
+        return allDayKeys()
+          .reverse()
+          .map((key) => {
+            const date = keyToDate(key);
+            const day = getDay(key);
+            return { key, date, day, week: currentWeekNumber(date) };
+          })
+          .filter((entry) => hasAnalysis(entry.day));
+      }
+
+      function archiveWeekOptions(entries) {
+        return Array.from(new Set(entries.map((entry) => entry.week)))
+          .sort((a, b) => b - a)
+          .map((week) => `
+            <option value="${week}" ${String(week) === state.archiveWeek ? "selected" : ""}>
+              ${week < 1 ? "未开始" : `第 ${week} 周`}
+            </option>
+          `).join("");
+      }
+
+      function filteredArchiveEntries(entries) {
+        const query = state.archiveQuery.trim().toLowerCase();
+        return entries.filter((entry) => {
+          const weekMatches = state.archiveWeek === "all" || String(entry.week) === state.archiveWeek;
+          const queryMatches = !query || analysisSearchText(entry.day).includes(query);
+          return weekMatches && queryMatches;
+        });
+      }
+
+      function renderArchiveList(entries = archiveEntries()) {
+        if (!entries.length) {
+          return `<div class="notice">还没有每日分析记录。回到 <a href="#today">§1 今天</a>，从一件具体小事写第一条。</div>`;
+        }
+        const filtered = filteredArchiveEntries(entries);
+        if (!filtered.length) {
+          return `<div class="notice">没有符合当前搜索或周筛选的分析记录。</div>`;
+        }
+        return `
+          <div class="archive-list">
+            ${filtered.map((entry) => {
+              const expanded = state.expandedArchive.has(entry.key);
+              const conclusion = entry.day.analysis.conclusion.trim();
+              const title = conclusion || "未写结论的分析记录";
+              const detailId = `archive-detail-${entry.key}`;
+              return `
+                <article class="archive-item ${expanded ? "expanded" : ""}">
+                  <button class="archive-toggle" type="button" data-archive-toggle="${entry.key}" aria-expanded="${expanded ? "true" : "false"}" aria-controls="${detailId}">
+                    <span class="archive-meta">${escapeHtml(entry.key)}<br>${escapeHtml(weekLabelForDate(entry.date))}</span>
+                    <span>
+                      <span class="archive-title">${escapeHtml(title)}</span>
+                      <span class="muted">${expanded ? "点按收起六字段全文" : "点按展开六字段全文"}</span>
+                    </span>
+                  </button>
+                  <div class="archive-full" id="${detailId}">
+                    <dl class="archive-fields">
+                      ${ANALYSIS_FIELDS.map((field) => {
+                        const value = entry.day.analysis[field.id].trim();
+                        return `
+                          <div>
+                            <dt>${escapeHtml(field.title)}</dt>
+                            <dd>${value ? escapeHtml(value) : `<span class="muted">—</span>`}</dd>
+                          </div>
+                        `;
+                      }).join("")}
+                    </dl>
+                  </div>
+                </article>
+              `;
+            }).join("")}
+          </div>
+        `;
+      }
+
+      function renderArchive() {
+        const entries = archiveEntries();
+        return `
+          ${sectionHead(6, "回顾", "翻阅与搜索已经写下的每日分析。", `<span>${entries.length} 条分析记录</span>`)}
+          <div class="archive-controls">
+            <div class="field">
+              <label class="label" for="archive-search">Search Analysis</label>
+              <input id="archive-search" type="search" autocomplete="off" value="${escapeHtml(state.archiveQuery)}" placeholder="搜索中间结构、耦合判断或结论">
+            </div>
+            <div class="field">
+              <label class="label" for="archive-week">Week</label>
+              <select id="archive-week">
+                <option value="all" ${state.archiveWeek === "all" ? "selected" : ""}>全部周次</option>
+                ${archiveWeekOptions(entries)}
+              </select>
+            </div>
+          </div>
+          <div id="archive-list">
+            ${renderArchiveList(entries)}
+          </div>
+        `;
+      }
+
+      function renderHabitGroup(group, statusMap) {
+        return `
+          <section class="habit-section" aria-labelledby="habit-${group.id}-title">
+            <div class="label">${escapeHtml(group.label)}</div>
+            <h3 id="habit-${group.id}-title">${escapeHtml(group.title)}</h3>
+            <div class="habit-list">
+              ${group.items.map((item) => {
+                const value = statusMap[item.id];
+                const checked = Boolean(value);
+                const dateText = group.id === "once" && typeof value === "string" ? `完成于 ${value}` : "";
+                return `
+                  <button class="habit-item" type="button" data-habit-group="${group.id}" data-habit-id="${item.id}" aria-pressed="${checked ? "true" : "false"}">
+                    <span class="box" aria-hidden="true"></span>
+                    <span>
+                      <strong class="habit-action">${escapeHtml(item.action)}</strong>
+                      ${item.desc ? `<span class="habit-desc">${escapeHtml(item.desc)}</span>` : ""}
+                      ${dateText ? `<span class="habit-date">${escapeHtml(dateText)}</span>` : ""}
+                      <span class="habit-id">${escapeHtml(item.id)}</span>
+                    </span>
+                  </button>
+                `;
+              }).join("")}
+            </div>
+          </section>
+        `;
+      }
+
+      function renderHabits() {
+        const key = dateToKey(today());
+        const day = getDay(key);
+        const weekNumber = currentWeekNumber();
+        const weekHabits = getWeekHabits(weekNumber);
+        const onceHabits = getOnceHabits();
+        const statusByGroup = {
+          daily: day.habits,
+          weekly: weekHabits,
+          once: onceHabits
+        };
+        const meta = `<span>${escapeHtml(formatDate(today()))}</span><span>${escapeHtml(weekNumber < 1 ? "未开始" : `第 ${weekNumber} 周`)}</span>`;
+        return `
+          ${sectionHead(7, "习惯", "精彩的世界，仍在屏幕之外继续发生。", meta)}
+          ${HABIT_GROUPS.map((group) => renderHabitGroup(group, statusByGroup[group.id])).join("")}
+        `;
+      }
+
       function bindPageEvents() {
         if (state.route === "today") bindTodayEvents();
         if (state.route === "week") bindWeekEvents();
         if (state.route === "templates") bindTemplateEvents();
         if (state.route === "progress") bindProgressEvents();
+        if (state.route === "archive") bindArchiveEvents();
+        if (state.route === "habits") bindHabitEvents();
       }
 
       function bindTodayEvents() {
         const key = dateToKey(today());
+        const saveStatus = document.getElementById("today-save-status");
+        const updateSaveStatus = (mode) => {
+          if (!saveStatus) return;
+          const time = new Intl.DateTimeFormat("zh-CN", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+          }).format(new Date());
+          const storageText = state.storageMode === "localStorage" ? "本机浏览器" : "内存临时存储";
+          saveStatus.textContent = `${mode} · ${storageText} · ${time}`;
+        };
+        const saveTodayForm = (mode = "已保存") => {
+          const day = getDay(key);
+          document.querySelectorAll("[data-today-analysis]").forEach((field) => {
+            day.analysis[field.dataset.analysisField] = field.value;
+          });
+          const note = document.getElementById("today-note");
+          const reflection = document.getElementById("today-reflection");
+          if (note) day.note = note.value;
+          if (reflection) day.reflection = reflection.value;
+          saveDay(key, day);
+          updateSaveStatus(mode);
+        };
         document.querySelectorAll("[data-segment]").forEach((button) => {
           button.addEventListener("click", () => {
             const day = getDay(key);
@@ -2202,16 +2764,31 @@
         });
         const note = document.getElementById("today-note");
         const reflection = document.getElementById("today-reflection");
+        document.querySelectorAll("[data-today-analysis]").forEach((field) => {
+          field.addEventListener("input", () => {
+            saveTodayForm("已自动保存");
+          });
+        });
         note.addEventListener("input", () => {
-          const day = getDay(key);
-          day.note = note.value;
-          saveDay(key, day);
+          saveTodayForm("已自动保存");
         });
         reflection.addEventListener("input", () => {
-          const day = getDay(key);
-          day.reflection = reflection.value;
-          saveDay(key, day);
+          saveTodayForm("已自动保存");
         });
+        document.querySelector("[data-save-today]").addEventListener("click", () => {
+          saveTodayForm("已手动保存");
+        });
+        if (state.focusTodayAnalysis) {
+          state.focusTodayAnalysis = false;
+          window.requestAnimationFrame(() => {
+            const first = document.getElementById("today-analysis-subject");
+            if (first) {
+              first.focus();
+              const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+              first.scrollIntoView({ block: "center", behavior: reduced ? "auto" : "smooth" });
+            }
+          });
+        }
       }
 
       function bindWeekEvents() {
@@ -2268,6 +2845,93 @@
             saveDay(key, day);
           });
         });
+        document.querySelectorAll("[data-week-edit-analysis]").forEach((field) => {
+          field.addEventListener("input", () => {
+            const key = field.dataset.weekEditDate;
+            const day = getDay(key);
+            day.analysis[field.dataset.analysisField] = field.value;
+            saveDay(key, day);
+          });
+        });
+      }
+
+      function bindArchiveToggles() {
+        document.querySelectorAll("[data-archive-toggle]").forEach((button) => {
+          button.addEventListener("click", () => {
+            const key = button.dataset.archiveToggle;
+            if (state.expandedArchive.has(key)) {
+              state.expandedArchive.delete(key);
+            } else {
+              state.expandedArchive.add(key);
+            }
+            const list = document.getElementById("archive-list");
+            if (list) {
+              list.innerHTML = renderArchiveList();
+              bindArchiveToggles();
+            }
+          });
+        });
+      }
+
+      function bindArchiveEvents() {
+        const search = document.getElementById("archive-search");
+        const week = document.getElementById("archive-week");
+        const refreshList = () => {
+          const list = document.getElementById("archive-list");
+          if (list) {
+            list.innerHTML = renderArchiveList();
+            bindArchiveToggles();
+          }
+        };
+        search.addEventListener("input", () => {
+          state.archiveQuery = search.value;
+          refreshList();
+        });
+        week.addEventListener("change", () => {
+          state.archiveWeek = week.value;
+          refreshList();
+        });
+        bindArchiveToggles();
+      }
+
+      function bindHabitEvents() {
+        document.querySelectorAll("[data-habit-group]").forEach((button) => {
+          button.addEventListener("click", () => {
+            const group = button.dataset.habitGroup;
+            const id = button.dataset.habitId;
+            if (group === "daily") {
+              const key = dateToKey(today());
+              const day = getDay(key);
+              day.habits = { ...day.habits };
+              if (day.habits[id]) {
+                delete day.habits[id];
+              } else {
+                day.habits[id] = true;
+              }
+              saveDay(key, day);
+            }
+            if (group === "weekly") {
+              const weekNumber = currentWeekNumber();
+              const habits = getWeekHabits(weekNumber);
+              if (habits[id]) {
+                delete habits[id];
+              } else {
+                habits[id] = true;
+              }
+              saveWeekHabits(weekNumber, habits);
+            }
+            if (group === "once") {
+              const habits = getOnceHabits();
+              if (habits[id]) {
+                delete habits[id];
+              } else {
+                habits[id] = dateToKey(today());
+              }
+              saveOnceHabits(habits);
+            }
+            render();
+          });
+        });
       }
 
       function fallbackCopy(text, element) {
@@ -2293,6 +2957,16 @@
       }
 
       function bindTemplateEvents() {
+        document.querySelectorAll("[data-use-analysis-template]").forEach((button) => {
+          button.addEventListener("click", () => {
+            state.focusTodayAnalysis = true;
+            if (window.location.hash === "#today") {
+              render();
+            } else {
+              window.location.hash = "today";
+            }
+          });
+        });
         document.querySelectorAll("[data-copy-template]").forEach((button) => {
           button.addEventListener("click", async () => {
             const index = Number(button.dataset.copyTemplate);
@@ -2321,13 +2995,18 @@
 
       function exportData() {
         const payload = {
-          version: 1,
+          version: 2,
           exportedAt: new Date().toISOString(),
           meta: state.meta,
-          days: {}
+          days: {},
+          weekHabits: {},
+          onceHabits: getOnceHabits()
         };
         allDayKeys().forEach((key) => {
           payload.days[key] = getDay(key);
+        });
+        allWeekHabitKeys().forEach((week) => {
+          payload.weekHabits[week] = getWeekHabits(Number(week));
         });
         const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
         const url = URL.createObjectURL(blob);
@@ -2366,22 +3045,52 @@
           saveDay(key, normalizeDay(value));
           imported += 1;
         });
+
+        let importedWeekHabits = 0;
+        if (payload.weekHabits && typeof payload.weekHabits === "object") {
+          Object.entries(payload.weekHabits).forEach(([week, value]) => {
+            if (/^-?\d+$/.test(week)) {
+              saveWeekHabits(Number(week), value);
+              importedWeekHabits += 1;
+            }
+          });
+        }
+        Object.entries(payload).forEach(([key, value]) => {
+          if (key.startsWith(WEEK_HABITS_PREFIX)) {
+            const week = key.slice(WEEK_HABITS_PREFIX.length);
+            if (/^-?\d+$/.test(week)) {
+              saveWeekHabits(Number(week), value);
+              importedWeekHabits += 1;
+            }
+          }
+        });
+
+        if (payload.onceHabits && typeof payload.onceHabits === "object") {
+          const current = getOnceHabits();
+          saveOnceHabits({ ...current, ...normalizeOnceHabits(payload.onceHabits) });
+        }
+        if (payload[ONCE_HABITS_KEY] && typeof payload[ONCE_HABITS_KEY] === "object") {
+          const current = getOnceHabits();
+          saveOnceHabits({ ...current, ...normalizeOnceHabits(payload[ONCE_HABITS_KEY]) });
+        }
         state.meta = loadMeta();
         state.selectedWeek = Math.max(1, currentWeekNumber());
-        setFlash(`已按天合并导入 ${imported} 天记录。`);
+        setFlash(`已按天合并导入 ${imported} 天记录，${importedWeekHabits} 周习惯记录。`);
         render();
       }
 
       function clearAllData() {
         listStorageKeys().forEach((key) => {
-          if (key === META_KEY || key.startsWith(DAY_PREFIX)) removeRaw(key);
+          if (key === META_KEY || key === ONCE_HABITS_KEY || key.startsWith(DAY_PREFIX) || key.startsWith(WEEK_HABITS_PREFIX)) removeRaw(key);
         });
         Object.keys(memoryStore).forEach((key) => {
-          if (key === META_KEY || key.startsWith(DAY_PREFIX)) delete memoryStore[key];
+          if (key === META_KEY || key === ONCE_HABITS_KEY || key.startsWith(DAY_PREFIX) || key.startsWith(WEEK_HABITS_PREFIX)) delete memoryStore[key];
         });
         state.meta = loadMeta();
         state.selectedWeek = Math.max(1, currentWeekNumber());
         state.clearArmed = false;
+        state.expandedArchive.clear();
+        state.expandedReflections.clear();
         setFlash("已清空本应用数据，并把开始日期重设为今天。");
         render();
       }
